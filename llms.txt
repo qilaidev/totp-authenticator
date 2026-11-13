@@ -1,0 +1,34 @@
+# TOTP Authenticator
+
+> Zero-network, offline-first RFC 6238 2FA TOTP authenticator for Web (PWA) and Telegram Mini App, built with Next.js 16 static export (`output: "export"`) and native WebCrypto (`crypto.subtle`).
+
+Canonical repository: https://github.com/qilaidev/totp-authenticator
+
+## Documentation
+
+- [English README](https://github.com/qilaidev/totp-authenticator/blob/main/README.en.md)
+- [Chinese README](https://github.com/qilaidev/totp-authenticator/blob/main/README.md)
+- [Technical Architecture](https://github.com/qilaidev/totp-authenticator/blob/main/docs/architecture.md)
+- [Three-Layer Storage & Sync Protocol](https://github.com/qilaidev/totp-authenticator/blob/main/docs/sync-protocol.md)
+- [Security Policy](https://github.com/qilaidev/totp-authenticator/blob/main/SECURITY.md)
+- [Contributing Guide](https://github.com/qilaidev/totp-authenticator/blob/main/CONTRIBUTING.md)
+
+## Module Map
+
+- `src/lib/totp.ts`: RFC 6238 TOTP generator (64-bit counter, `SHA1`/`SHA256`/`SHA512`, 6–8 digits), strict RFC 4648 Base32 validation, and `otpauth://totp/...` URI parser.
+- `src/lib/auth-store.ts`: `localStorage` (`authList`) store, Telegram `DeviceStorage` recovery fallback, and validated JSON backup import/export.
+- `src/lib/sync-crypto.ts`: WebCrypto AES-GCM key generation, import/export, and payload encryption/decryption for cross-device sync.
+- `src/lib/sync-merge.ts`: Deterministic non-destructive 3-way merge (`fingerprint` via `cyrb53`, `planSync` adopting cloud deletions or computing `(remark, secret)` union on concurrent edits).
+- `src/lib/cloud-sync.ts`: Telegram `CloudStorage` orchestrator with authoritative `tfa_sync_dek` key reads and double-buffered `3800`-char chunk writes (`tfa_sync_g0_*` / `tfa_sync_g1_*`).
+- `src/lib/telegram.ts`: Progressive enhancement wrapper for Telegram WebApp APIs (`isVersionAtLeast` guards, `DeviceStorage`, `CloudStorage`, `HapticFeedback`, `showScanQrPopup`); no-ops outside Telegram.
+- `src/lib/time-sync.ts`: Same-origin `HEAD` request `Date` header clock-skew detection and compensation (>10s threshold).
+- `src/lib/qr.ts`: QR decoding via native `BarcodeDetector` with lazy-loaded `jsqr` fallback.
+- `src/lib/base-path.ts`: `NEXT_PUBLIC_BASE_PATH` normalization and `withBase()` helper for static assets not rewritten by Next.js.
+- `public/sw.js`: Scope-aware offline Service Worker deriving mount path from `self.location`.
+
+## Build & Deployment Variables
+
+- `output: "export"` in `next.config.ts` produces pure static files in `out/` (no Node.js runtime, no API routes, no Server Actions).
+- `NEXT_PUBLIC_BASE_PATH`: Optional subpath mount (e.g., `/2fa` for GitHub Pages; leave unset for root domain).
+- CSP in `src/app/layout.tsx` enforces `connect-src 'self'`, `base-uri 'none'`, `form-action 'none'`, `object-src 'none'`.
+- Quality gate: `npm install && npm run check` (`eslint`, `tsc --noEmit`, `vitest run`, `next build`).

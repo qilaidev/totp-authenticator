@@ -1,0 +1,14 @@
+# Auto-detect text files and normalise line endings to LF in the repo
+* text=auto
+
+# Shell scripts must always use LF, even on Windows
+*.sh text eol=lf
+
+# Batch files must always use CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# 原站源码的逐字抓取，是复刻的比对证据，不是本仓代码。
+# 它们带着原站的行尾空格，而主仓 pre-commit 的 `git diff --check` 会因此拒绝提交。
+# 洗掉空格等于篡改证据，所以这里关掉这批路径的空白检查，而不是改文件。
+docs/research/**/source/** -whitespace
