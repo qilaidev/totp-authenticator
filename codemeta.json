@@ -1,0 +1,94 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "totp-authenticator",
+  "alternateName": [
+    "2FA 身份验证器（TOTP）",
+    "TOTP Authenticator",
+    "Zero-Network 2FA PWA",
+    "Telegram Mini App TOTP Authenticator"
+  ],
+  "description": "Zero-network, offline-first RFC 6238 2FA TOTP authenticator for Web (PWA) and Telegram Mini App built with Next.js 16 static export (output: \"export\") and native WebCrypto (crypto.subtle). Computes 6-8 digit codes locally in the browser with strict CSP (connect-src 'self'), Service Worker offline caching, and optional AES-GCM encrypted Telegram CloudStorage cross-device sync.",
+  "version": "1.0.0",
+  "codeRepository": "https://github.com/qilaidev/totp-authenticator",
+  "issueTracker": "https://github.com/qilaidev/totp-authenticator/issues",
+  "url": "https://qilaidav.com/workspace/",
+  "license": "https://spdx.org/licenses/MIT",
+  "programmingLanguage": [
+    "TypeScript",
+    "JavaScript",
+    "CSS"
+  ],
+  "runtimePlatform": [
+    "Web Browser (PWA)",
+    "Telegram Mini App",
+    "Node.js >= 24 (build-time)"
+  ],
+  "operatingSystem": "Cross-platform (any modern browser in a Secure Context)",
+  "applicationCategory": "SecurityApplication",
+  "applicationSubCategory": "Two-factor authentication (2FA TOTP) authenticator",
+  "developmentStatus": "active",
+  "inLanguage": [
+    "zh-CN",
+    "en"
+  ],
+  "readme": "https://github.com/qilaidev/totp-authenticator/blob/main/README.md",
+  "softwareHelp": "https://github.com/qilaidev/totp-authenticator/blob/main/docs/architecture.md",
+  "keywords": [
+    "2fa",
+    "totp",
+    "authenticator",
+    "rfc6238",
+    "webcrypto",
+    "offline-first",
+    "zero-network",
+    "pwa",
+    "nextjs",
+    "static-export",
+    "telegram-mini-app",
+    "privacy",
+    "local-first",
+    "typescript",
+    "aes-gcm",
+    "two-factor-authentication",
+    "2FA 身份验证器（TOTP）",
+    "离线 2FA 验证器"
+  ],
+  "featureList": [
+    "Native WebCrypto (crypto.subtle) RFC 6238 TOTP generation with 64-bit counter (SHA1, SHA256, SHA512; 6-8 digits; 1-300s period)",
+    "Strict RFC 4648 Base32 validation rejecting invalid characters",
+    "Pure Next.js 16 static export (output: \"export\") with zero Node.js backend and zero telemetry",
+    "Strict meta Content-Security-Policy enforcing connect-src 'self', base-uri 'none', form-action 'none', and object-src 'none'",
+    "Scope-aware offline Service Worker (public/sw.js) and subpath deployment support via NEXT_PUBLIC_BASE_PATH",
+    "Same-origin HTTP Date header clock-skew detection and automatic compensation (>10s threshold)",
+    "QR scanning via Telegram showScanQrPopup, native BarcodeDetector, or lazy-loaded jsqr fallback",
+    "Three-layer storage: per-origin localStorage, Telegram DeviceStorage recovery, and AES-GCM encrypted Telegram CloudStorage 3-way merge sync",
+    "Standard [{ remark, secret }] JSON backup import/export with validation limits"
+  ],
+  "softwareRequirements": [
+    "Modern web browser in a Secure Context (HTTPS or http://localhost)",
+    "Node.js >= 24 and npm for building static assets from source"
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "qilaidev",
+      "url": "https://github.com/qilaidev",
+      "sameAs": [
+        "https://qilaidav.com",
+        "https://github.com/qilaidev"
+      ]
+    }
+  ],
+  "maintainer": [
+    {
+      "@type": "Person",
+      "name": "qilaidev",
+      "url": "https://github.com/qilaidev",
+      "sameAs": [
+        "https://qilaidav.com",
+        "https://github.com/qilaidev"
+      ]
+    }
+  ]
+}
