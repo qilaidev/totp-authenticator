@@ -3,10 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
+  "author": "qilaidev",
   "description": "Zero-network, offline-first RFC 6238 2FA TOTP authenticator for Web (PWA) and Telegram Mini App built with native WebCrypto",
+  "homepage": "https://qilaidav.com/workspace/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/qilaidev/totp-authenticator.git"
+    "url": "git+https://github.com/qilaidev/totp-authenticator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/qilaidev/totp-authenticator/issues"
   },
   "engines": {
     "node": ">=24"
